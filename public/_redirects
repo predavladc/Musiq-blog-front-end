@@ -1,4 +1,1 @@
-/blogs/*  https://mighty-plains-66074.herokuapp.com/routes/blogs:splat  200
-/authors/*  https://mighty-plains-66074.herokuapp.com/routes/authors:splat  200
 /* /index.html 200
-/images/* https://mighty-plains-66074.herokuapp.com/images/:splat 200
