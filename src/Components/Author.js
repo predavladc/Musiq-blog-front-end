@@ -12,9 +12,8 @@ const Author = () => {
   const [blogsOfAuthor, setBlogsOfAuthor] = useState();
   const { authorId } = useParams();
 
-  const urlString = `${serverURL}/routes/author/${authorId}`;
   useEffect(() => {
-    fetch(urlString)
+    fetch(`${serverURL}/routes/author/${authorId}`)
       .then((res) => res.json())
       .then((data) => {
         setBlogsOfAuthor(data);

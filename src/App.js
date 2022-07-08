@@ -20,7 +20,7 @@ function App() {
         justify="center"
         elevate={2}
       >
-        <Topnav  />
+        <Topnav />
         <Paper elevation={2}>
           <Grid container>
             <Grid item xs={12}>
@@ -35,7 +35,7 @@ function App() {
               <Route path=":blogId" element={<Blog />} />
               <Route path="/author/:authorId" element={<Author />} />
               <Route path="/style/:genreId" element={<Genre />} />
-              <Route path="/routes/blogs/time" element={<Testwindow />} />
+              <Route path="/test" element={<Testwindow />} />
             </Routes>
           </div>
           <Footer />

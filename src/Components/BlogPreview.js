@@ -24,7 +24,7 @@ const BlogPreview = ({ id }) => {
     <div>
       <Typography variant="h4">{blogPreview.title}</Typography>
       <Grid container spacing={2}>
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={8}>
           <Button
             component={Link}
             to={`/author/${blogPreview.author_id}`}
@@ -37,7 +37,7 @@ const BlogPreview = ({ id }) => {
           <DatePosted date={blogPreview.created_at} />
           <div dangerouslySetInnerHTML={{ __html: blogPreview.summary }}></div>
         </Grid>
-        <Grid item xs={3} align="center">
+        <Grid item xs={12} sm={4} align="center">
           <Box
             component="img"
             className="RockLogo blogImgPreview"
