@@ -1,53 +1,81 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import client from "../contentful/client";
-import BlogPreview from "./BlogPreview";
-import { Paper, Button } from "@mui/material";
+import { Paper, Button, Typography, Grid, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import serverURL from "../serverURL.js";
+import DatePosted from "./DatePosted";
+import { useNavigate } from "react-router-dom";
 
 const Author = () => {
-  const { authorId } = useParams();
-  const [articles, setArticles] = useState();
+  const navigate = useNavigate();
 
+  const [blogsOfAuthor, setBlogsOfAuthor] = useState();
+  const { authorId } = useParams();
+
+  const urlString = `${serverURL}/routes/author/${authorId}`;
   useEffect(() => {
-    client
-      .getEntries({
-        content_type: "article",
-        "fields.author.sys.id": authorId,
-      })
-      .then((data) => setArticles(data));
+    fetch(urlString)
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogsOfAuthor(data);
+      });
   }, []);
 
-  if (!articles) {
+  if (!blogsOfAuthor) {
     return <h1>Loading...</h1>;
   }
 
-  const articlesList = articles.items;
- 
   return (
-    <div>
-      {articlesList.map((article, index) => (
-        <div key={index}>
-          <Paper
-            style={{
-              padding: "30px",
-              margin: "20px",
-              backgroundColor: "#eceef1",
-            }}
-          >
-            <BlogPreview {...article.fields} />
-            <Button
-              component={Link}
-              to={`../${article.sys.id}`}
-              variant="outlined"
-              color="primary"
+    <div className="blogList">
+      {blogsOfAuthor.map((blog, index) => {
+        return (
+          <div key={index} className="previewCard">
+            <Paper
+              style={{
+                padding: "30px",
+                margin: "20px",
+                backgroundColor: "#eceef1",
+              }}
             >
-              Read more
-            </Button>
-          </Paper>
-        </div>
-      ))}
+              <div className="previewCard">
+                <Typography variant="h4">{blog.title}</Typography>
+                <Grid container spacing={2}>
+                  <Grid item xs={9}>
+                    <Button
+                      component={Link}
+                      to={`/author/${blog.author_id}`}
+                      variant="text"
+                      color="secondary"
+                    >
+                      <Typography variant="overline">{blog.name}, </Typography>
+                    </Button>
+                    <span>posted </span>
+                    <DatePosted date={blog.created_at} />
+                    <div
+                      dangerouslySetInnerHTML={{ __html: blog.summary }}
+                    ></div>
+                  </Grid>
+                  <Grid item xs={3} align="center">
+                    <Box
+                      component="img"
+                      className="RockLogo blogImgPreview"
+                      alt="Logo"
+                      src={`${serverURL}/images/${blog.hero_img}`}
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => navigate(`../${blog.article_id}`)}
+              >
+                <Typography>Read more</Typography>
+              </Button>
+            </Paper>
+          </div>
+        );
+      })}
     </div>
   );
 };
