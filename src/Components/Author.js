@@ -17,7 +17,8 @@ const Author = () => {
       .then((res) => res.json())
       .then((data) => {
         setBlogsOfAuthor(data);
-      });
+      })
+      .catch((err) => console.log({fetchAuthorsError: err.message}))
   }, []);
 
   if (!blogsOfAuthor) {

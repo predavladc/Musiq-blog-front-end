@@ -17,7 +17,8 @@ const Blog = () => {
       .then((data) => {
         console.log(data);
         setBlogPost(data[0]);
-      });
+      })
+      .catch((err) => console.log({fetchArticleError: err.message}))
   }, []);
 
   if (!blogPost) {

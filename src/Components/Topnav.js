@@ -16,7 +16,6 @@ import { styled, alpha } from "@mui/material/styles";
 import rockicon from "../media/rock.svg";
 import { NavLink, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import client from "../contentful/client";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",

@@ -14,7 +14,8 @@ const Genre = () => {
   useEffect(() => {
     fetch(`${serverURL}/routes/blogs/style/${genreId}`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => setData(data))
+      .catch((err) => console.log({fetchStylesArticleError: err.message}))
   }, [genreId]);
   // console.log(data);
   if (!data) {

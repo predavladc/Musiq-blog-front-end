@@ -14,7 +14,8 @@ const Bloglist = () => {
       .then((data) => {
         // console.log(data);
         setBlogList(data);
-      });
+      })
+      .catch((err) => console.log({ fetchAllArticlesError: err.message }));
   }, []);
   if (!blogList) {
     return <h1>Loading...</h1>;
@@ -31,10 +32,10 @@ const Bloglist = () => {
                 backgroundColor: "#eceef1",
               }}
             >
-              <BlogPreview id={blog.id} />
+              <BlogPreview article={blog} />
               <Button
                 component={Link}
-                to={`${blog.id}`}
+                to={`${blog.article_id}`}
                 variant="outlined"
                 color="primary"
               >

@@ -6,6 +6,7 @@ import DatePosted from "./DatePosted";
 import { useNavigate } from "react-router-dom";
 
 const Testwindow = () => {
+  console.log("testwindow");
   const [data, setData] = useState();
   const navigate = useNavigate();
 
