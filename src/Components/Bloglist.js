@@ -12,7 +12,7 @@ const Bloglist = () => {
     fetch(`${serverURL}/routes/blogs`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setBlogList(data);
       });
   }, []);

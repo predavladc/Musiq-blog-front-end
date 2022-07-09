@@ -16,7 +16,7 @@ const Genre = () => {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [genreId]);
-  console.log(data);
+  // console.log(data);
   if (!data) {
     return <p>Loading.</p>;
   }
